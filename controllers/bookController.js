@@ -6,6 +6,7 @@ const user = require('../models/user/UserModel');
 const jwt=require('jsonwebtoken')
 //...........................BOOK DETAILS....................//
 const singlebook = async (req, res) => {
+  console.log('hii')
   try {
     console.log(req.params);
     const { id } = req.params;
@@ -82,7 +83,7 @@ const deleteBook = async (req, res) => {
 
 const searchBook = async (req, res) => {
   const { name } = req.query;
-  console.log(name);
+
   try {
     const searchResults = await Book.find({
       name: { $regex: new RegExp(name, 'i') },

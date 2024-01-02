@@ -9,7 +9,8 @@ bookRoute.post('/addbook',upload.single('file'),verifyToken,AddBook)
 bookRoute.get('/viewbook',verifyToken,viewbook)
 bookRoute.delete('/delete/:id',verifyToken,deleteBook);
 
-bookRoute.get('/search', verifyToken,searchBook);
+bookRoute.post('/search', verifyToken,searchBook);
+bookRoute.get('/singlebook/:id', verifyToken,singlebook);
 
 
 bookRoute.post('/addcategory', upload.single('file'),verifyToken, addcategory);
