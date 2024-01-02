@@ -6,18 +6,28 @@ const user = require('../models/user/UserModel');
 const jwt=require('jsonwebtoken')
 //...........................BOOK DETAILS....................//
 const singlebook = async (req, res) => {
-  console.log('hii')
   try {
-    console.log(req.params);
-    const { id } = req.params;
-    const BookId = id.trim();
-    const singlebook = await Book.findById(BookId);
-    console.log(singlebook);
-    res.status(201).json(singlebook);
+    const { name } = req.params;
+
+    if (!name) {
+      return res.status(400).json({ error: 'Book name is required in the route parameters' });
+    }
+
+    const singlebook = await Book.findOne({ name: name });
+
+    if (!singlebook) {
+      return res.status(404).json({ error: 'Book not found' });
+    }
+
+    res.status(200).json(singlebook);
   } catch (error) {
-    res.status(500).json(error);
+    console.error('Error fetching single book:', error);
+   
   }
 };
+
+
+
 
 //ADD BOOK
 const AddBook = async (req, res) => {
